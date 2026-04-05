@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/DSA-6/Class/LinkedList",
-      "program": "d:/DSA-6/Class/LinkedList/build/Debug/outDebug",
+      "cwd": "d:/DSA-6/Assignments/DSA_MG_2026/02-SinglyLinkedList",
+      "program": "d:/DSA-6/Assignments/DSA_MG_2026/02-SinglyLinkedList/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
