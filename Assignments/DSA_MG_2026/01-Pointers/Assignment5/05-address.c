@@ -3,7 +3,7 @@
 int main()
 {
     int a=9;
-    float=6.6;
+    float b=6.6;
     char c='A';
 
     int *p1 = &a;

@@ -22,7 +22,7 @@ int main()
     printf("Sum of array:");
     for(i=0; i<5; i++)
     {
-        printf("%d", *(res+i));
+        printf("%d \n", *(res+i));
     }
     return 0;
 }
