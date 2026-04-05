@@ -2,31 +2,38 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct singlyLL{
+typedef struct singlyLL
+{
     int no;
     char name[20];  
     struct singlyLL *next;
 }sl;
 
-sl *insert_at_head(sl *head, int data, char name[]){
+sl *insert_at_head(sl *head, int data, char name[])
+{
     sl *new = (sl*) malloc(sizeof(sl));
     new->no = data;
     strcpy(new->name, name);
 
-    if(head==NULL){
+    if(head==NULL)
+    {
         new->next=NULL;
-    }else{
+    }
+    else
+    {
         new->next=head;
     }
     return new;
 }
 
-sl *insert_at_end(sl *head, int data, char name[]){
+sl *insert_at_end(sl *head, int data, char name[])
+{
     sl *new = (sl*) malloc(sizeof(sl));
     new->no = data;
     strcpy(new->name, name);
     new->next = NULL;
-    if(head==NULL){
+    if(head==NULL)
+    {
         return new;
     }
     sl *p;

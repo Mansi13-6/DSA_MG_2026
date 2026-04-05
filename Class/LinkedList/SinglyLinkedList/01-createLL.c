@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct stud{
+typedef struct stud
+{
     int no;
     char name[10];
     struct stud *next;
@@ -14,7 +15,8 @@ void swap(S *head);
 void add(S *head);
 void search(S *head, int key);
 
-int main(){
+int main()
+{
     S *start = NULL;
     int key;
     start = create(start);
@@ -30,7 +32,8 @@ int main(){
     search(start, key);
     return 0;
 }
-S* create(S *head){
+S* create(S *head) 
+{
     S *temp, *last = NULL;
     int i;
     for(i = 0; i < 3; i++){
@@ -49,7 +52,8 @@ S* create(S *head){
     return head;
 }
 
-void swap(S *head){
+void swap(S *head)
+{
     if(head == NULL || head->next == NULL){
         return;
     }
@@ -67,7 +71,8 @@ void swap(S *head){
         p = q->next;
     }
 }
-void add(S *head){
+void add(S *head)
+{
     if(head == NULL || head->next == NULL){
         return;
     }
@@ -88,7 +93,8 @@ void add(S *head){
         q->next = new;
     }
 }
-void search(S *head, int key){
+void search(S *head, int key)
+{
     S *p = head;
     int position = 1;
     while(p != NULL){

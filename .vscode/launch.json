@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/mansi/OneDrive/Documents/DSA-6/Class/Array",
-      "program": "c:/Users/mansi/OneDrive/Documents/DSA-6/Class/Array/build/Debug/outDebug",
+      "cwd": "d:/DSA-6/Class/LinkedList",
+      "program": "d:/DSA-6/Class/LinkedList/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
