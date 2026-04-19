@@ -53,7 +53,5 @@ dkms.conf
 
 # debug information files
 *.dwo
-*.png
-*.exe
 *.tmp
 *.log
