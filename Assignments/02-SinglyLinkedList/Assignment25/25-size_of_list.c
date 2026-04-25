@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct node
+typedef struct singlyLL
 {
     int data;
-    struct node *next;
-} node;
+    struct singlyLL *next;
+} sl;
 
-node *create(node *head);
-void display(node *head);
-int count_nodes(node *head);
+sl *create(sl *head);
+void display(sl *head);
+int count_nodes(sl *head);
 
 int main()
 {
-    node *head = NULL;
+    sl *head = NULL;
     int count;
 
     head = create(head);
@@ -28,9 +28,9 @@ int main()
     return 0;
 }
 
-node *create(node *head)
+sl *create(sl *head)
 {
-    node *temp, *last = NULL;
+    sl *temp, *last = NULL;
     int n, i;
 
     printf("Enter number of nodes: ");
@@ -38,7 +38,7 @@ node *create(node *head)
 
     for (i = 0; i < n; i++)
     {
-        temp = (node *)malloc(sizeof(node));
+        temp = (sl *)malloc(sizeof(sl));
         printf("Enter data: ");
         scanf("%d", &temp->data);
 
@@ -59,9 +59,9 @@ node *create(node *head)
     return head;
 }
 
-void display(node *head)
+void display(sl *head)
 {
-    node *p = head;
+    sl *p = head;
 
     while (p != NULL)
     {
@@ -71,10 +71,10 @@ void display(node *head)
     printf("NULL\n");
 }
 
-int count_nodes(node *head)
+int count_nodes(sl *head)
 {
     int count = 0;
-    node *p = head;
+    sl *p = head;
 
     while (p != NULL)
     {

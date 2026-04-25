@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node
+typedef struct singlyLL
 {
     int data;
     char name[50];
-    struct node *next;
-} node;
+    struct singlyLL *next;
+} sl;
 
-node *create(node *head);
-void display(node *head);
-node *delete_after_key(node *head, int key);
+sl *create(sl *head);
+void display(sl *head);
+sl *delete_after_key(sl *head, int key);
 
 int main()
 {
-    node *head = NULL;
+    sl *head = NULL;
     int key;
 
     head = create(head);
@@ -34,9 +34,9 @@ int main()
     return 0;
 }
 
-node *create(node *head)
+sl *create(sl *head)
 {
-    node *temp, *last = NULL;
+    sl *temp, *last = NULL;
     int n, i;
 
     printf("Enter number of nodes: ");
@@ -44,7 +44,7 @@ node *create(node *head)
 
     for (i = 0; i < n; i++)
     {
-        temp = (node *)malloc(sizeof(node));
+        temp = (sl *)malloc(sizeof(sl));
         printf("Enter data and name: ");
         scanf("%d %s", &temp->data, temp->name);
 
@@ -61,9 +61,9 @@ node *create(node *head)
     return head;
 }
 
-void display(node *head)
+void display(sl *head)
 {
-    node *p = head;
+    sl *p = head;
     while (p != NULL)
     {
         printf("%d %s -> ", p->data, p->name);
@@ -72,9 +72,9 @@ void display(node *head)
     printf("NULL\n");
 }
 
-node *delete_after_key(node *head, int key)
+sl *delete_after_key(sl *head, int key)
 {
-    node *p = head;
+    sl *p = head;
 
     while (p != NULL && p->data != key)
         p = p->next;
@@ -85,7 +85,7 @@ node *delete_after_key(node *head, int key)
         return head;
     }
 
-    node *temp = p->next;
+    sl *temp = p->next;
     p->next = temp->next;
     free(temp);
 

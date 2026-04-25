@@ -2,20 +2,20 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node
+typedef struct singlyLL
 {
     int data;
     char name[50];
-    struct node *next;
-} node;
+    struct singlyLL *next;
+} sl;
 
-node *create(node *head);
-void display(node *head);
-void sort_list(node *head);
+sl *create(sl *head);
+void display(sl *head);
+void sort_list(sl *head);
 
 int main()
 {
-    node *head = NULL;
+    sl *head = NULL;
 
     head = create(head);
 
@@ -30,9 +30,9 @@ int main()
     return 0;
 }
 
-node *create(node *head)
+sl *create(sl *head)
 {
-    node *temp, *last = NULL;
+    sl *temp, *last = NULL;
     int n, i;
 
     printf("Enter number of nodes: ");
@@ -40,7 +40,7 @@ node *create(node *head)
 
     for (i = 0; i < n; i++)
     {
-        temp = (node *)malloc(sizeof(node));
+        temp = (sl*)malloc(sizeof(sl));
 
         printf("Enter data and name: ");
         scanf("%d %s", &temp->data, temp->name);
@@ -62,9 +62,9 @@ node *create(node *head)
     return head;
 }
 
-void display(node *head)
+void display(sl *head)
 {
-    node *p = head;
+   sl *p = head;
 
     while (p != NULL)
     {
@@ -74,9 +74,9 @@ void display(node *head)
     printf("NULL\n");
 }
 
-void sort_list(node *head)
+void sort_list(sl *head)
 {
-    node *i, *j;
+    sl *i, *j;
     int temp_data;
     char temp_name[50];
 

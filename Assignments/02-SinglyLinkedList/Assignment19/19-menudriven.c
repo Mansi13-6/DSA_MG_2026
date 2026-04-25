@@ -2,22 +2,22 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node
+typedef struct singlyLL
 {
     int data;
     char name[50];
-    struct node *next;
-} node;
+    struct singlyLL *next;
+} sl;
 
-node *create(node *head);
-node *insert(node *head, int data, char name[]);
-node *delete_node(node *head, int key);
-node *reverse(node *head);
-void display(node *head);
+sl *create(sl *head);
+sl *insert(sl *head, int data, char name[]);
+sl *delete_node(sl *head, int key);
+sl *reverse(sl *head);
+void display(sl *head);
 
 int main()
 {
-    node *head = NULL;
+    sl *head = NULL;
     int choice, data, key;
     char name[50];
 
@@ -73,9 +73,9 @@ int main()
     return 0;
 }
 
-node *create(node *head)
+sl *create(sl *head)
 {
-    node *temp, *last = NULL;
+    sl *temp, *last = NULL;
     int n, i;
 
     printf("Enter number of nodes: ");
@@ -83,7 +83,7 @@ node *create(node *head)
 
     for (i = 0; i < n; i++)
     {
-        temp = (node *)malloc(sizeof(node));
+        temp = (sl*)malloc(sizeof(sl));
 
         printf("Enter data and name: ");
         scanf("%d %s", &temp->data, temp->name);
@@ -105,9 +105,9 @@ node *create(node *head)
     return head;
 }
 
-node *insert(node *head, int data, char name[])
+sl *insert(sl *head, int data, char name[])
 {
-    node *temp = (node *)malloc(sizeof(node));
+    sl *temp = (sl*)malloc(sizeof(sl));
     temp->data = data;
     strcpy(temp->name, name);
     temp->next = NULL;
@@ -115,7 +115,7 @@ node *insert(node *head, int data, char name[])
     if (head == NULL)
         return temp;
 
-    node *p = head;
+    sl *p = head;
     while (p->next != NULL)
         p = p->next;
 
@@ -123,7 +123,7 @@ node *insert(node *head, int data, char name[])
     return head;
 }
 
-node *delete_node(node *head, int key)
+sl *delete_node(sl *head, int key)
 {
     if (head == NULL)
     {
@@ -133,13 +133,13 @@ node *delete_node(node *head, int key)
 
     if (head->data == key)
     {
-        node *temp = head;
+        sl *temp = head;
         head = head->next;
         free(temp);
         return head;
     }
 
-    node *p = head;
+    sl *p = head;
     while (p->next != NULL && p->next->data != key)
         p = p->next;
 
@@ -149,16 +149,16 @@ node *delete_node(node *head, int key)
         return head;
     }
 
-    node *temp = p->next;
+    sl *temp = p->next;
     p->next = temp->next;
     free(temp);
 
     return head;
 }
 
-node *reverse(node *head)
+sl *reverse(sl *head)
 {
-    node *prev = NULL, *curr = head, *next;
+    sl *prev = NULL, *curr = head, *next;
     while (curr != NULL)
     {
         next = curr->next;
@@ -170,9 +170,9 @@ node *reverse(node *head)
     return prev;
 }
 
-void display(node *head)
+void display(sl *head)
 {
-    node *p = head;
+    sl *p = head;
 
     if (p == NULL)
     {

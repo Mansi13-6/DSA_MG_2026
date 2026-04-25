@@ -25,13 +25,26 @@ int main()
 sl* create(sl *head) 
 {
     sl *temp, *last = NULL;
-    int i;
-    for(i = 0; i < 5; i++)
+    int i, n;
+
+    printf("Enter number of nodes: ");
+    scanf("%d", &n);
+
+    for(i = 0; i < n; i++)
     {
         temp = (sl*)malloc(sizeof(sl));
+
+        if(temp == NULL)
+        {
+            printf("Memory allocation failed!\n");
+            exit(1);
+        }
+
         printf("Enter the data and name: ");
         scanf("%d %s", &temp->data, temp->name);
+
         temp->next = NULL;
+
         if(head == NULL)
         {
             head = temp;

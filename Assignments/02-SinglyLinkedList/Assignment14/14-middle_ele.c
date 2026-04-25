@@ -5,15 +5,15 @@ typedef struct node
 {
     int data;
     struct node *next;
-} node;
+} sl;
 
-node *create(node *head);
-void display(node *head);
-void find_middle(node *head);
+sl *create(sl *head);
+void display(sl *head);
+void find_middle(sl *head);
 
 int main()
 {
-    node *head = NULL;
+    sl *head = NULL;
 
     head = create(head);
 
@@ -25,9 +25,9 @@ int main()
     return 0;
 }
 
-node *create(node *head)
+sl *create(sl *head)
 {
-    node *temp, *last = NULL;
+    sl *temp, *last = NULL;
     int n, i;
 
     printf("Enter number of nodes: ");
@@ -35,7 +35,7 @@ node *create(node *head)
 
     for (i = 0; i < n; i++)
     {
-        temp = (node *)malloc(sizeof(node));
+        temp = (sl *)malloc(sizeof(sl));
         printf("Enter data: ");
         scanf("%d", &temp->data);
 
@@ -56,9 +56,9 @@ node *create(node *head)
     return head;
 }
 
-void display(node *head)
+void display(sl *head)
 {
-    node *p = head;
+    sl *p = head;
 
     while (p != NULL)
     {
@@ -68,7 +68,7 @@ void display(node *head)
     printf("NULL\n");
 }
 
-void find_middle(node *head)
+void find_middle(sl *head)
 {
     if (head == NULL)
     {
@@ -76,8 +76,8 @@ void find_middle(node *head)
         return;
     }
 
-    node *slowptr = head;
-    node *fastptr = head;
+    sl *slowptr = head;
+    sl *fastptr = head;
     while (fastptr != NULL && fastptr->next != NULL)
     {
         slowptr = slowptr->next;

@@ -2,35 +2,35 @@
 #include <stdlib.h>
 #include <string.h>
 
-typedef struct node
+typedef struct singlyLL
 {
     int data;
     char name[50];
-    struct node *next;
-} node;
+    struct singlyLL *next;
+} sl;
 
-node *create(node *head);
-void display(node *head);
-void display_reverse(node *head);
+sl *create(sl *head);
+void display(sl *head);
+void display_reverse(sl *head);
 
 int main()
 {
-    node *head = NULL;
+    sl *head = NULL;
 
     head = create(head);
 
     printf("\nOriginal List:\n");
     display(head);
 
-    printf("\nReverse Order (Using Normal Function):\n");
+    printf("\nReverse Order:\n");
     display_reverse(head);
 
     return 0;
 }
 
-node *create(node *head)
+sl *create(sl *head)
 {
-    node *temp, *last = NULL;
+    sl *temp, *last = NULL;
     int n, i;
 
     printf("Enter number of nodes: ");
@@ -38,7 +38,7 @@ node *create(node *head)
 
     for (i = 0; i < n; i++)
     {
-        temp = (node *)malloc(sizeof(node));
+        temp = (sl*)malloc(sizeof(sl));
 
         printf("Enter data and name: ");
         scanf("%d %s", &temp->data, temp->name);
@@ -60,9 +60,9 @@ node *create(node *head)
     return head;
 }
 
-void display(node *head)
+void display(sl *head)
 {
-    node *p = head;
+    sl *p = head;
 
     while (p != NULL)
     {
@@ -72,10 +72,10 @@ void display(node *head)
     printf("NULL\n");
 }
 
-void display_reverse(node *head)
+void display_reverse(sl *head)
 {
-    node *p = head;
-    node *arr[100];  
+    sl *p = head;
+    sl *arr[100];  
     int top = 0;
 
     while (p != NULL)
