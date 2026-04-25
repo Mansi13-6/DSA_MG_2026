@@ -1,60 +1,99 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct student 
+typedef struct student 
 {
     char name[50];
     int rollno;
     int std;
     char div;
     struct student *next;
-};
+} s;
 
-int main() 
+s* create(s*);
+void display(s*);
+void freeList(s*);
+
+int main()
 {
-    struct student *head = NULL, *temp, *new_node;
-    int n, i;
-    printf("Enter number of students: ");
-    scanf("%d", &n);
+    s* head = NULL;
+    head = create(head);
+    display(head);
+    freeList(head);
+    return 0;
+}
 
-    for(i = 0; i < n; i++) 
+s* create(s* head)
+{
+    s *newNode = NULL, *last = NULL;
+    int ch;
+
+    do
     {
-        new_node = (struct student*)malloc(sizeof(struct student));
+        newNode = (s*)malloc(sizeof(s));
 
-        printf("\nEnter Name: ");
-        scanf("%s", new_node->name);
-
-        printf("Enter Roll No: ");
-        scanf("%d", &new_node->rollno);
-
-        printf("Enter Std: ");
-        scanf("%d", &new_node->std);
-
-        printf("Enter Division: ");
-        scanf(" %c", &new_node->div);
-
-        new_node->next = NULL;
-        if(head == NULL) 
+        if(newNode == NULL)
         {
-            head = new_node;
-            temp = new_node;
-        } 
-        else 
-        {
-            temp->next = new_node;
-            temp = new_node;
+            printf("Memory allocation failed!\n");
+            exit(1);
         }
-    }
-    temp = head;
-    printf("\nStudent List:\n");
-    while(temp != NULL) 
+
+        printf("Enter student name: ");
+        scanf(" %[^\n]", newNode->name);   // read full name
+
+        printf("Enter student roll no: ");
+        scanf("%d", &newNode->rollno);
+
+        printf("Enter student std: ");
+        scanf("%d", &newNode->std);
+
+        printf("Enter student div: ");
+        scanf(" %c", &newNode->div);  
+
+        newNode->next = NULL;
+
+        if(head == NULL)
+        {
+            head = newNode;
+            last = newNode;
+        }
+        else
+        {
+            last->next = newNode;
+            last = newNode;
+        }
+
+        printf("Do you want to continue? (1/0): ");
+        scanf("%d", &ch);
+
+    } while(ch != 0);
+
+    return head;
+}
+
+void display(s* temp)
+{
+    printf("\n---- DISPLAYING LIST OF STUDENTS ----\n");
+
+    while(temp != NULL)
     {
-        printf("\nName: %s", temp->name);
-        printf("\nRoll No: %d", temp->rollno);
-        printf("\nStd: %d", temp->std);
-        printf("\nDiv: %c\n", temp->div);
+        printf("\nName      : %s\n", temp->name);
+        printf("Roll No   : %d\n", temp->rollno);
+        printf("Standard  : %d\n", temp->std);
+        printf("Division  : %c\n", temp->div);
+
         temp = temp->next;
     }
+}
 
-    return 0;
+void freeList(s* head)
+{
+    s* temp;
+
+    while(head != NULL)
+    {
+        temp = head;
+        head = head->next;
+        free(temp);
+    }
 }

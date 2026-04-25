@@ -34,19 +34,16 @@ int main()
     return 0;
 }
 
-sl* create(sl *head) 
+sl *create(sl *head)
 {
     sl *temp, *last = NULL;
-    int i, n;
+    int ch;
 
-    printf("Enter number of nodes: ");
-    scanf("%d", &n);
-
-    for(i = 0; i < n; i++)
+    do
     {
-        temp = (sl*)malloc(sizeof(sl));
+        temp = (sl *)malloc(sizeof(sl));
 
-        if(temp == NULL)
+        if (temp == NULL)
         {
             printf("Memory allocation failed!\n");
             exit(1);
@@ -57,17 +54,22 @@ sl* create(sl *head)
 
         temp->next = NULL;
 
-        if(head == NULL)
+        if (head == NULL)
         {
             head = temp;
             last = temp;
-        } 
-        else 
+        }
+        else
         {
             last->next = temp;
             last = temp;
         }
-    }
+
+        printf("Do you want to continue? (1/0): ");
+        scanf("%d", &ch);
+
+    } while (ch != 0);
+
     return head;
 }
 

@@ -37,12 +37,9 @@ int main()
 sl* create(sl *head) 
 {
     sl *temp, *last = NULL;
-    int i, n;
+    int ch;
 
-    printf("Enter number of nodes: ");
-    scanf("%d", &n);
-
-    for(i = 0; i < n; i++)
+    do
     {
         temp = (sl*)malloc(sizeof(sl));
 
@@ -67,7 +64,12 @@ sl* create(sl *head)
             last->next = temp;
             last = temp;
         }
-    }
+
+        printf("Do you want to continue? (1/0): ");
+        scanf("%d", &ch);
+
+    } while(ch != 0);
+
     return head;
 }
 
