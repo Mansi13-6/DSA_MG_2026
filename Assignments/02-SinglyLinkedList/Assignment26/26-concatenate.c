@@ -7,6 +7,7 @@ typedef struct singlyLL
     int data;
     char name[50];
     struct singlyLL *next;
+
 } sl;
 
 sl *create(sl *head);
@@ -15,12 +16,14 @@ sl *concatenate(sl *head1, sl *head2);
 
 int main()
 {
-    sl *head1 = NULL, *head2 = NULL, *head3 = NULL;
+    sl *head1 = NULL;
+    sl *head2 = NULL;
+    sl *head3 = NULL;
 
-    printf("Create List 1:\n");
+    printf("Create List 1\n");
     head1 = create(head1);
 
-    printf("\nCreate List 2:\n");
+    printf("\nCreate List 2\n");
     head2 = create(head2);
 
     printf("\nList 1:\n");
@@ -31,70 +34,124 @@ int main()
 
     head3 = concatenate(head1, head2);
 
-    printf("\nAfter Concatenation (List1 + List2):\n");
+    printf("\nConcatenated List:\n");
     display(head3);
 
     return 0;
 }
 
-sl* create(sl *head) 
+sl *create(sl *head)
 {
-    sl *temp, *last = NULL;
-    int ch;
+    sl *newnode, *temp;
+    int choice;
 
     do
     {
-        temp = (sl*)malloc(sizeof(sl));
+        newnode = (sl *)malloc(sizeof(sl));
 
-        if(temp == NULL)
+        printf("Enter data and name : ");
+        scanf("%d %s",
+              &newnode->data,
+              newnode->name);
+
+        newnode->next = NULL;
+
+        if (head == NULL)
         {
-            printf("Memory allocation failed!\n");
-            exit(1);
+            head = newnode;
+        }
+        else
+        {
+            temp = head;
+
+            while (temp->next != NULL)
+            {
+                temp = temp->next;
+            }
+
+            temp->next = newnode;
         }
 
-        printf("Enter the data and name: ");
-        scanf("%d %s", &temp->data, temp->name);
+        printf("Do you want to continue ? ");
+        scanf("%d", &choice);
 
-        temp->next = NULL;
-
-        if(head == NULL)
-        {
-            head = temp;
-            last = temp;
-        } 
-        else 
-        {
-            last->next = temp;
-            last = temp;
-        }
-
-        printf("Do you want to continue? (1/0): ");
-        scanf("%d", &ch);
-
-    } while(ch != 0);
+    } while (choice == 1);
 
     return head;
 }
+
 void display(sl *head)
 {
-    sl *p = head;
+    sl *temp;
 
-    while (p != NULL)
+    temp = head;
+
+    while (temp != NULL)
     {
-        printf("%d %s -> ", p->data, p->name);
-        p = p->next;
+        printf("|_%d_|_%s_| --> ",
+               temp->data,
+               temp->name);
+
+        temp = temp->next;
     }
+
     printf("NULL\n");
 }
+
 sl *concatenate(sl *head1, sl *head2)
 {
-    if (head1 == NULL)
-        return head2;
+    sl *head3 = NULL;
+    sl *temp, *newnode, *last = NULL;
 
-    sl *p = head1;
-    while (p->next != NULL)
-        p = p->next;
-    p->next = head2;
+    temp = head1;
 
-    return head1;
+    while (temp != NULL)
+    {
+        newnode = (sl *)malloc(sizeof(sl));
+
+        newnode->data = temp->data;
+        strcpy(newnode->name, temp->name);
+
+        newnode->next = NULL;
+
+        if (head3 == NULL)
+        {
+            head3 = newnode;
+            last = newnode;
+        }
+        else
+        {
+            last->next = newnode;
+            last = newnode;
+        }
+
+        temp = temp->next;
+    }
+
+    temp = head2;
+
+    while (temp != NULL)
+    {
+        newnode = (sl *)malloc(sizeof(sl));
+
+        newnode->data = temp->data;
+        strcpy(newnode->name, temp->name);
+
+        newnode->next = NULL;
+
+        if (head3 == NULL)
+        {
+            head3 = newnode;
+            last = newnode;
+        }
+        else
+        {
+            last->next = newnode;
+            last = newnode;
+        }
+
+        temp = temp->next;
+    }
+
+    return head3;
 }

@@ -21,52 +21,44 @@ void create(int data, char name[])
     newnode->data = data;
     strcpy(newnode->name, name);
 
+    newnode->next = NULL;
+
     if (head == NULL)
     {
         head = newnode;
-        newnode->next = head;
     }
     else
     {
         temp = head;
 
-        while (temp->next != head)
+        while (temp->next != NULL)
         {
             temp = temp->next;
         }
 
         temp->next = newnode;
-        newnode->next = head;
     }
 }
 
-void delete_after_key(int key)
+void reverse_list()
 {
-    node_t *temp, *del;
+    node_t *prev, *current, *nextnode;
 
-    temp = head;
+    prev = NULL;
+    current = head;
 
-    do
+    while (current != NULL)
     {
-        if (temp->data == key)
-        {
-            del = temp->next;
+        nextnode = current->next;
 
-            if (del == head)
-            {
-                return;
-            }
+        current->next = prev;
 
-            temp->next = del->next;
+        prev = current;
 
-            free(del);
+        current = nextnode;
+    }
 
-            return;
-        }
-
-        temp = temp->next;
-
-    } while (temp != head);
+    head = prev;
 }
 
 void display()
@@ -75,35 +67,40 @@ void display()
 
     temp = head;
 
-    do
+    while (temp != NULL)
     {
         printf("|_%d_|_%s_| --> ",
                temp->data,
                temp->name);
 
         temp = temp->next;
+    }
 
-    } while (temp != head);
-
-    printf("HEAD\n");
+    printf("NULL\n");
 }
 
 int main()
 {
-    int key;
+    int n, i, data;
+    char name[20];
 
-    create(1, "AA");
-    create(2, "BB");
-    create(3, "CC");
-    create(4, "DD");
+    printf("Enter number of nodes : ");
+    scanf("%d", &n);
 
+    for (i = 1; i <= n; i++)
+    {
+        printf("Enter data and name : ");
+        scanf("%d %s", &data, name);
+
+        create(data, name);
+    }
+
+    printf("\nOriginal List:\n");
     display();
 
-    printf("Enter key : ");
-    scanf("%d", &key);
+    reverse_list();
 
-    delete_after_key(key);
-
+    printf("\nReversed List:\n");
     display();
 
     return 0;

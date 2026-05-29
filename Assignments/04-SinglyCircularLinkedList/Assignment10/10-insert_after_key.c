@@ -4,58 +4,56 @@
 
 typedef struct node
 {
-    int id;
+    int data;
     char name[20];
-    int num;
     struct node *next;
 
 } node_t;
 
 node_t *head = NULL;
 
-void create(int id, char name[], int num)
+void create(int data, char name[])
 {
     node_t *newnode, *temp;
 
     newnode = (node_t *)malloc(sizeof(node_t));
 
-    newnode->id = id;
+    newnode->data = data;
     strcpy(newnode->name, name);
-    newnode->num = num;
-    newnode->next = NULL;
 
     if (head == NULL)
     {
         head = newnode;
+        newnode->next = head;
     }
     else
     {
         temp = head;
 
-        while (temp->next != NULL)
+        while (temp->next != head)
         {
             temp = temp->next;
         }
 
         temp->next = newnode;
+        newnode->next = head;
     }
 }
 
-void insert_after_key(int key, int id, char name[], int num)
+void insert_after_key(int key, int data, char name[])
 {
     node_t *temp, *newnode;
 
     temp = head;
 
-    while (temp != NULL)
+    do
     {
-        if (temp->id == key)
+        if (temp->data == key)
         {
             newnode = (node_t *)malloc(sizeof(node_t));
 
-            newnode->id = id;
+            newnode->data = data;
             strcpy(newnode->name, name);
-            newnode->num = num;
 
             newnode->next = temp->next;
 
@@ -65,7 +63,8 @@ void insert_after_key(int key, int id, char name[], int num)
         }
 
         temp = temp->next;
-    }
+
+    } while (temp != head);
 }
 
 void display()
@@ -74,38 +73,38 @@ void display()
 
     temp = head;
 
-    while (temp != NULL)
+    do
     {
-        printf("|_%d_|_%s_|_%d_| --> ",
-               temp->id,
-               temp->name,
-               temp->num);
+        printf("|_%d_|_%s_| --> ",
+               temp->data,
+               temp->name);
 
         temp = temp->next;
-    }
 
-    printf("NULL\n");
+    } while (temp != head);
+
+    printf("HEAD\n");
 }
 
 int main()
 {
-    int key, id, num;
+    int key, data;
     char name[20];
 
-    create(1, "AA", 100);
-    create(2, "BB", 200);
-    create(3, "CC", 300);
-    create(4, "DD", 500);
+    create(1, "AA");
+    create(2, "BB");
+    create(3, "CC");
+    create(4, "DD");
 
     display();
 
     printf("Enter key : ");
     scanf("%d", &key);
 
-    printf("Enter id name num : ");
-    scanf("%d %s %d", &id, name, &num);
+    printf("Enter data and name : ");
+    scanf("%d %s", &data, name);
 
-    insert_after_key(key, id, name, num);
+    insert_after_key(key, data, name);
 
     display();
 

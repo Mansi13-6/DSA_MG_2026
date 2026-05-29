@@ -4,57 +4,65 @@
 
 typedef struct node
 {
-    int id;
+    int data;
     char name[20];
-    int num;
     struct node *next;
 
 } node_t;
 
 node_t *head = NULL;
 
-void create(int id, char name[], int num)
+void create(int data, char name[])
 {
     node_t *newnode, *temp;
 
     newnode = (node_t *)malloc(sizeof(node_t));
 
-    newnode->id = id;
+    newnode->data = data;
     strcpy(newnode->name, name);
-    newnode->num = num;
-    newnode->next = NULL;
 
     if (head == NULL)
     {
         head = newnode;
+        newnode->next = head;
     }
     else
     {
         temp = head;
 
-        while (temp->next != NULL)
+        while (temp->next != head)
         {
             temp = temp->next;
         }
 
         temp->next = newnode;
+        newnode->next = head;
     }
 }
 
 void delete_before_key(int key)
 {
-    node_t *temp, *prev, *del;
+    node_t *temp, *prev, *del, *last;
 
-    if (head == NULL || head->next == NULL)
+    if (head == NULL || head->next == head)
     {
         return;
     }
 
-    if (head->next->id == key)
+    if (head->next->data == key)
     {
+        last = head;
+
+        while (last->next != head)
+        {
+            last = last->next;
+        }
+
         del = head;
 
         head = head->next;
+
+        last->next = head;
 
         free(del);
 
@@ -64,9 +72,9 @@ void delete_before_key(int key)
     prev = head;
     temp = head->next;
 
-    while (temp->next != NULL)
+    while (temp->next != head)
     {
-        if (temp->next->id == key)
+        if (temp->next->data == key)
         {
             del = temp;
 
@@ -88,27 +96,27 @@ void display()
 
     temp = head;
 
-    while (temp != NULL)
+    do
     {
-        printf("|_%d_|_%s_|_%d_| --> ",
-               temp->id,
-               temp->name,
-               temp->num);
+        printf("|_%d_|_%s_| --> ",
+               temp->data,
+               temp->name);
 
         temp = temp->next;
-    }
 
-    printf("NULL\n");
+    } while (temp != head);
+
+    printf("HEAD\n");
 }
 
 int main()
 {
     int key;
 
-    create(1, "AA", 100);
-    create(2, "BB", 200);
-    create(3, "CC", 300);
-    create(4, "DD", 500);
+    create(1, "AA");
+    create(2, "BB");
+    create(3, "CC");
+    create(4, "DD");
 
     display();
 

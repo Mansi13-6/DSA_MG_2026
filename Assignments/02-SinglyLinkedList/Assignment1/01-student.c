@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 struct student
 {
     int rollno;
@@ -11,8 +12,9 @@ struct student
 int main()
 {
     struct student *p;
-    p = (struct student*) malloc(sizeof(struct student));
-    
+
+    p = (struct student *)malloc(sizeof(struct student));
+
     printf("Enter roll no: ");
     scanf("%d", &p->rollno);
 
@@ -26,9 +28,13 @@ int main()
     scanf(" %c", &p->div);
 
     printf("\nStudent Details:\n");
+
     printf("Roll Number: %d\n", p->rollno);
     printf("Name: %s\n", p->name);
     printf("Standard: %d\n", p->std);
     printf("Division: %c\n", p->div);
+
+    free(p);
+
     return 0;
 }
