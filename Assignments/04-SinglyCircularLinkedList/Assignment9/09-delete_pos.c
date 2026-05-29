@@ -37,9 +37,10 @@ void create(int value)
     }
 }
 
-void delete_end()
+void delete_position(int pos)
 {
     node_t *temp, *prev;
+    int i;
 
     if (head == NULL)
     {
@@ -47,28 +48,33 @@ void delete_end()
         return;
     }
 
-    if (head->next == head)
+    temp = head;
+
+    if (pos == 1)
     {
-        printf("%d deleted\n", head->data);
+        while (temp->next != head)
+        {
+            temp = temp->next;
+        }
+
+        temp->next = head->next;
 
         free(head);
 
-        head = NULL;
+        head = temp->next;
 
         return;
     }
 
     temp = head;
 
-    while (temp->next != head)
+    for (i = 1; i < pos; i++)
     {
         prev = temp;
         temp = temp->next;
     }
 
-    printf("%d deleted\n", temp->data);
-
-    prev->next = head;
+    prev->next = temp->next;
 
     free(temp);
 }
@@ -98,13 +104,19 @@ void display()
 
 int main()
 {
+    int pos;
+
     create(10);
     create(20);
     create(30);
+    create(40);
 
     display();
 
-    delete_end();
+    printf("Enter position to delete : ");
+    scanf("%d", &pos);
+
+    delete_position(pos);
 
     display();
 
